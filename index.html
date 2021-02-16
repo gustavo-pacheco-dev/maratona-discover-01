@@ -17,7 +17,7 @@
             <section id="balance">
                 <h2 class="sr-only">Balanço</h2>
 
-                <div class="card">
+                <div class="card income" title="Total de entradas que sua conta possui...">
                     <h3>
                         <span>Entradas</span>
                         <img src="assets/income.svg" alt="Imagem de Entradas">
@@ -25,7 +25,7 @@
                     <p id="incomeDisplay">R$ 0,00</p>
                 </div>
 
-                <div class="card">
+                <div class="card expense" title="Total de despesas que sua conta possui...">
                     <h3>
                         <span>Saídas</span>
                         <img src="assets/expense.svg" alt="Imagem de Saídas">
@@ -33,7 +33,7 @@
                     <p id="expenseDisplay">R$ 0,00</p>
                 </div>
 
-                <div class="card total">
+                <div class="card total" title="Diferença entre suas entradas e suas saídas...">
                     <h3>
                         <span>Total</span>
                         <img src="assets/total.svg" alt="Imagem do Total">
@@ -45,7 +45,7 @@
             <section id="transactions">
                 <h2 class="sr-only">Transações</h2>
                 
-                <a href="#" onclick="Modal.open()" class="button new">+ Nova Transação</a>
+                <a href="#" onclick="Modal.open()" class="button new" title="Adicione uma nova transação">+ Nova Transação</a>
 
                 <table id="transactions-table">
                     <thead>

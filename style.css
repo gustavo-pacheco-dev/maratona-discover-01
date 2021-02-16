@@ -78,6 +78,11 @@ button:hover {
     margin-bottom: .8rem;
 }
 
+.button.new:hover {
+    font-size: 1.15rem;
+    transition: font 0.35s ease 0s;
+}
+
 .button.cancel {
     color: var(--red);
     border: 2px var(--red) solid;
@@ -108,7 +113,7 @@ header {
 
 /* BALANCE ============== */
 #balance {
-    margin-top: -8rem;
+    margin-top: -7rem;
     /* border: 0px; */
 }
 
@@ -121,9 +126,13 @@ header {
 .card {
     background-color: white;
     padding: 1.5rem 2rem;
-    border-radius: 0.25rem;
+    
+    border-bottom: 5px solid transparent;
+    border-radius: 0.50rem;
     margin-bottom: 2rem;
     color: var(--dark-blue);
+
+    box-shadow: 1px 1px 5px black;
 }
 
 .card h3 {
@@ -144,6 +153,23 @@ header {
 .card.total {
     background: var(--green);
     color: white;
+}
+
+
+
+.card:hover {
+    transform: translateY(-8px);
+    transition: border 0.3s ease 0s, transform 0.2s ease 0s;
+}
+
+.card.income:hover {
+    border-color: var(--light-green);
+}
+.card.expense:hover {
+    border-color: var(--red);
+}
+.card.total:hover {
+    border-color: #2D4A22;
 }
 
 /* TABLE ============== */
@@ -177,11 +203,24 @@ table thead th {
 }
 
 table tbody tr {
+    border: 3px solid;
     opacity: 0.7;
 }
 
 table tbody tr:hover {
+    transform: translateY(-5px);
+    transition: border 0.35s ease 0s, transform 0.2s ease 0s;
     opacity: 1;
+}
+
+table tbody tr:hover td.income {
+    border-bottom: 3px solid;
+    border-color: rgba(61, 215, 5, 0.6);
+}
+
+table tbody tr:hover td.expense {
+    border-bottom: 3px solid;
+    border-color: rgba(233, 41, 41, 0.6);
 }
 
 table tbody td {
