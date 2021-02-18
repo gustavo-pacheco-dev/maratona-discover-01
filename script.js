@@ -82,10 +82,10 @@ const DOM = {
         const amount = Utils.formatCurrency(transaction.amount)
 
         const html = `
-        <td class="description">${transaction.description}</td>
-        <td class="${CSSclass}">${amount}</td>
-        <td class="date">${transaction.date}</td>
-        <td class="remove-button" title="Remover Transação">
+        <td class="transaction description">${transaction.description}</td>
+        <td class="transaction ${CSSclass}">${amount}</td>
+        <td class="transaction date">${transaction.date}</td>
+        <td class="transaction remove-button" title="Remover Transação">
             <img src="assets/minus.svg" alt="Remover Transação" onclick="Transaction.remove(${index})">
         </td>
         `
@@ -98,6 +98,27 @@ const DOM = {
     },
     clearTransactions() {
         DOM.transactionsContainer.innerHTML = ''
+    },
+    switchTheme() {
+        const switchColor = document.getElementById('switch-theme-button')
+
+        switchColor.addEventListener('click', checkMode)
+
+        function checkMode() {
+            if (switchColor.checked) {
+                setDarkTheme()
+            } else {
+                setLightTheme()
+            }
+        }
+
+        function setDarkTheme() {
+            document.body.classList.add('dark-theme')
+        }
+
+        function setLightTheme() {
+            document.body.classList.remove('dark-theme')
+        }
     }
 }
 
@@ -191,6 +212,7 @@ const App = {
         Transaction.all.forEach(DOM.addTransaction)
         DOM.updateBalance()
         Storage.set(Transaction.all)
+        DOM.switchTheme()
     },
     reload(){
         DOM.clearTransactions()

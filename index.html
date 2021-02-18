@@ -10,7 +10,30 @@
     </head>
     <body>
         <header>
-            <img src="assets/logo.svg" alt="Logo Dev Finance">
+            <div class="themes-logo-chart">
+                <div class="set-theme" title="Experimente o Modo Escuro...">
+                    <div class="sun-icon-div" title="Modo Claro">
+                        <img src="./assets/sun.svg" alt="Ícone do Light Theme" class="header-icons" id="sun-icon">
+                    </div>
+                    
+                    <div class="switch-button-area" title="Experimente o Modo Escuro...">
+                        <input type="checkbox" name="Theme" id="switch-theme-button" onclick="DOM.switchTheme()">
+                        <label for="switch-theme-button" class="switch-theme">
+                            <div class="switch-theme-toggle"></div>
+                        </label>
+                    </div>
+                    
+                    <div class="night-icon-div" title="Modo Escuro">
+                        <img src="./assets/night.svg" alt="Ícone do Dark Theme" class="header-icons" id="night-icon">
+                    </div>
+                </div>
+                
+                <img src="assets/logo.svg" alt="Logo Dev Finance" id="logo" title="Logo Dev Finance">
+                
+                <div class="set-chart" title="Experimente os gráficos e tenha um melhor controle econômico...">
+                    <img src="./assets/pie-chart.svg" alt="Ícone de Gráfico Genérico" class="header-icons">
+                </div>
+            </div>
         </header>
 
         <main class="container">
