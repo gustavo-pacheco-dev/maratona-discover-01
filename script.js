@@ -119,6 +119,23 @@ const DOM = {
         function setLightTheme() {
             document.body.classList.remove('dark-theme')
         }
+    },
+    addPieCharts() {
+        const pieChartsButton = document.getElementById('piechart-button')
+
+        pieChartsButton.addEventListener('click', checkChartMode)
+
+        function checkChartMode() {
+            const sectionPieCharts = document.getElementById('piecharts')
+
+            if (pieChartsButton.checked) {
+                sectionPieCharts.classList.remove('disabled')
+                sectionPieCharts.classList.add('piecharts-on')
+            } else {
+                sectionPieCharts.classList.remove('piecharts-on')
+                sectionPieCharts.classList.add('disabled')
+            }
+        }
     }
 }
 
@@ -213,6 +230,7 @@ const App = {
         DOM.updateBalance()
         Storage.set(Transaction.all)
         DOM.switchTheme()
+        DOM.addPieCharts()
     },
     reload(){
         DOM.clearTransactions()

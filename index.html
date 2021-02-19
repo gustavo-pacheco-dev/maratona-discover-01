@@ -7,6 +7,53 @@
         <link rel="stylesheet" href="./style.css">
         <link rel="preconnect" href="https://fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,400;0,700;1,100;1,400;1,700&display=swap" rel="stylesheet">
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        <script type="text/javascript">
+          google.charts.load('current', {'packages':['corechart']});
+          google.charts.setOnLoadCallback(drawChart);
+    
+          function drawChart() {
+    
+            var data = google.visualization.arrayToDataTable([
+              ['Descrição', 'Valor'],
+              ['App',                     5000],
+              ['WebSite DevFinance',      4500],
+              ['Salário',                 2500],
+              ['Trabalho de Freelance',   1250],
+            ]);
+    
+            var options = {
+              title: 'Entradas'
+            };
+    
+            var chart = new google.visualization.PieChart(document.getElementById('piechartIncomes'));
+    
+            chart.draw(data, options);
+          }
+        </script>
+        <script type="text/javascript">
+          google.charts.load('current', {'packages':['corechart']});
+          google.charts.setOnLoadCallback(drawChart);
+    
+          function drawChart() {
+    
+            var data = google.visualization.arrayToDataTable([
+              ['Descrição', 'Valor'],
+              ['Água',     135.50],
+              ['Luz',      155.75],
+              ['Internet',  200],
+              ['Manutenção do Servidor', 75],
+            ]);
+    
+            var options = {
+              title: 'Saídas'
+            };
+    
+            var chart = new google.visualization.PieChart(document.getElementById('piechartExpenses'));
+    
+            chart.draw(data, options);
+          }
+        </script>
     </head>
     <body>
         <header>
@@ -30,7 +77,8 @@
                 
                 <img src="assets/logo.svg" alt="Logo Dev Finance" id="logo" title="Logo Dev Finance">
                 
-                <div class="set-chart" title="Experimente os gráficos e tenha um melhor controle econômico...">
+                <div class="set-chart" title="Experimente os gráficos e tenha um melhor controle econômico..." onclick="DOM.addPieCharts()">
+                    <input type="checkbox" name="PieCharts" id="piechart-button">
                     <img src="./assets/pie-chart.svg" alt="Ícone de Gráfico Genérico" class="header-icons">
                 </div>
             </div>
@@ -82,6 +130,14 @@
                     <tbody>
                     </tbody>
                 </table>
+            </section>
+
+            <section id="piecharts" class="">
+                <h2 id="piecharts-title">Gráficos de Controle</h2>
+                <div id="piecharts-div">
+                    <div id="piechartIncomes" style="width: 500px; height: 277px;"></div>
+                    <div id="piechartExpenses" style="width: 500px; height: 277px;"></div>
+                </div>
             </section>
         </main>
 

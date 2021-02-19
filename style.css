@@ -140,6 +140,25 @@ body {
 #switch-theme-button:checked ~ .switch-theme-toggle::before {
     transform: translateX(2em);
 }
+
+/* DARK THEME PIE CHARTS */
+.dark-theme #piecharts-title {
+    color: #cacaca;
+}
+.dark-theme rect {
+    fill: #1A1A1A;
+}
+.dark-theme g > text {
+    fill: white;
+}
+.dark-theme .google-visualization-tooltip path {
+    fill: #1A1A1A;
+    stroke: white;
+}
+.dark-theme .google-visualization-tooltip g > text {
+    fill: white;
+}
+
 /* DARK THEME FOOTER */
 .dark-theme footer {
     color: #cacaca;
@@ -151,6 +170,9 @@ h2 {
     margin-bottom: 0.8rem;
     color: var(--dark-blue);
     font-weight: normal;
+}
+#piecharts-title {
+    text-align: center;
 }
 
 /* LINKS AND BUTTONS ============== */
@@ -177,6 +199,12 @@ button {
 
 button:hover {
     background-color: var(--light-green);
+}
+
+#piechart-button {
+    display: none;
+    position: absolute;
+    width: 100%;
 }
 
 .button.new {
@@ -220,14 +248,12 @@ header {
     align-items: center;
     justify-content: space-between;
 }
+
 .set-theme {
     display: flex;
     align-items: center;
     justify-content: space-between;
     width: auto;
-}
-#logo {
-    margin: 0 6.5em 0 0;
 }
 .sun-icon-div {
     margin-right: 8px;
@@ -235,9 +261,14 @@ header {
 .night-icon-div {
     margin-left: 60px;
 }
-/* Adicionar ".set-chart" aqui */
 
+#logo {
+    margin: 0 6.5em 0 0;
+}
 
+.set-chart {
+    cursor: pointer;
+}
 
 /* BALANCE ============== */
 #balance {
@@ -368,6 +399,34 @@ td.income {
 
 td.expense {
     color: var(--red);
+}
+
+td.remove-button {
+    cursor: pointer;
+}
+
+/* PIE CHART SETTINGS */
+#piecharts.disabled {
+    position: absolute;
+    display: none;
+}
+
+#piecharts.piecharts-on {
+    position: static;
+    display: inline-block;
+}
+
+#piecharts-div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#piechartIncomes {
+    margin: 0 auto;
+}
+#piechartExpenses {
+    margin: 0 auto;
 }
 
 /* MODAL ============== */
