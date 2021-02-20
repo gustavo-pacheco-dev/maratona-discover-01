@@ -77,9 +77,10 @@
                 
                 <img src="assets/logo.svg" alt="Logo Dev Finance" id="logo" title="Logo Dev Finance">
                 
-                <div class="set-chart" title="Experimente os gráficos e tenha um melhor controle econômico..." onclick="DOM.addPieCharts()">
-                    <input type="checkbox" name="PieCharts" id="piechart-button">
-                    <img src="./assets/pie-chart.svg" alt="Ícone de Gráfico Genérico" class="header-icons">
+                <div class="set-chart" title="Experimente os gráficos e tenha um melhor controle econômico...">
+                    <label for="piechart-button" class="add-piecharts"><img src="./assets/pie-chart.svg" alt="Ícone de Gráfico Genérico" class="header-icons" id="chart-icon"></label>
+                    <input type="checkbox" name="PieCharts" id="piechart-button" onclick="DOM.addPieChartsAndCheckStatusPoint()">
+                    <div class="piecharts-status-point disabled"></div>
                 </div>
             </div>
         </header>
@@ -132,11 +133,11 @@
                 </table>
             </section>
 
-            <section id="piecharts" class="">
+            <section id="piecharts" class="disabled">
                 <h2 id="piecharts-title">Gráficos de Controle</h2>
                 <div id="piecharts-div">
-                    <div id="piechartIncomes" style="width: 500px; height: 277px;"></div>
-                    <div id="piechartExpenses" style="width: 500px; height: 277px;"></div>
+                    <div id="piechartIncomes"></div>
+                    <div id="piechartExpenses"></div>
                 </div>
             </section>
         </main>

@@ -120,23 +120,45 @@ const DOM = {
             document.body.classList.remove('dark-theme')
         }
     },
-    addPieCharts() {
-        const pieChartsButton = document.getElementById('piechart-button')
-
+    addPieChartsAndCheckStatusPoint() {
+        const pieChartsButton = document.querySelector('input#piechart-button')
+        const sectionPieCharts = document.querySelector('section#piecharts')
+        const pieChartsStatusPoint = document.querySelector('div.piecharts-status-point')
+        
+        checkPieChartsStatusPoint()
         pieChartsButton.addEventListener('click', checkChartMode)
 
+        function checkPieChartsStatusPoint () {
+            if (pieChartsButton.checked) {
+                pieChartsStatusPoint.innerHTML = '<p>ON</p>'
+                pieChartsStatusPoint.classList.remove('disabled')
+                pieChartsStatusPoint.classList.add('piecharts-on')
+            } else {
+                pieChartsStatusPoint.innerHTML = '<p>OFF</p>'
+                pieChartsStatusPoint.classList.add('disabled')
+                pieChartsStatusPoint.classList.remove('piecharts-on')
+            }
+        }
+
         function checkChartMode() {
-            const sectionPieCharts = document.getElementById('piecharts')
 
             if (pieChartsButton.checked) {
+                addAllPieCharts()
+            } else {
+                removeAllPieCharts()
+            }
+
+            function addAllPieCharts() {
                 sectionPieCharts.classList.remove('disabled')
                 sectionPieCharts.classList.add('piecharts-on')
-            } else {
+            }
+
+            function removeAllPieCharts() {
                 sectionPieCharts.classList.remove('piecharts-on')
                 sectionPieCharts.classList.add('disabled')
             }
         }
-    }
+    },
 }
 
 const Utils = {
@@ -230,7 +252,7 @@ const App = {
         DOM.updateBalance()
         Storage.set(Transaction.all)
         DOM.switchTheme()
-        DOM.addPieCharts()
+        DOM.addPieChartsAndCheckStatusPoint()
     },
     reload(){
         DOM.clearTransactions()

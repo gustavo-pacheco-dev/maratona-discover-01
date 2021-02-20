@@ -204,7 +204,8 @@ button:hover {
 #piechart-button {
     display: none;
     position: absolute;
-    width: 100%;
+    width: 35px;
+    height: 35px;
 }
 
 .button.new {
@@ -267,7 +268,15 @@ header {
 }
 
 .set-chart {
-    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: 3.7vw;
+    height: auto;
+}
+
+#chart-icon {
+    display: inline-flex;
 }
 
 /* BALANCE ============== */
@@ -406,26 +415,68 @@ td.remove-button {
 }
 
 /* PIE CHART SETTINGS */
-#piecharts.disabled {
-    position: absolute;
-    display: none;
+.add-piecharts {
+    cursor: pointer;
 }
 
-#piecharts.piecharts-on {
+.piecharts-status-point {
+    display: block;
+    position: absolute;
+    width: 20px;
+    height: 10px;
+    margin: 0 36px 30px 0;
+    
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 0.5em;
+    text-align: center;
+    color: white;
+
+    border: 1px solid white;
+    border-radius: 10em;
+}
+
+section#piecharts.disabled {
+    display: none;
+    position: absolute;
+}
+
+.piecharts-status-point.disabled {
+    background-color: var(--red);
+}
+
+section#piecharts.piecharts-on {
+    display: block;
     position: static;
-    display: inline-block;
+}
+
+.piecharts-status-point.piecharts-on {
+    background-color: var(--light-green);
 }
 
 #piecharts-div {
-    display: flex;
+    display: block;
     align-items: center;
     justify-content: center;
 }
 
+svg g:first-of-type text {
+    margin: 0;
+}
+
+g text {
+    margin-right: 5px;
+}
+
+svg g:last-of-type text {
+    margin: 0;
+}
+
 #piechartIncomes {
+    width: 500px; height: 277px;
     margin: 0 auto;
 }
 #piechartExpenses {
+    width: 500px; height: 277px;
     margin: 0 auto;
 }
 
