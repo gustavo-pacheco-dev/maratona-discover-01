@@ -5,25 +5,26 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>dev.finance$</title>
         <link rel="stylesheet" href="./style.css">
+        <link rel="shortcut icon" href="./assets/dollar-sign.svg" type="image/x-icon">
+        <!-- Links para importar as fontes externas do Google -->
         <link rel="preconnect" href="https://fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,400;0,700;1,100;1,400;1,700&display=swap" rel="stylesheet">
+        <!-- Scripts do Google para a inserção de gráficos de pizza -->
         <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-        <script type="text/javascript">
+        <script type="text/javascript" id="script-piechart-incomes">
           google.charts.load('current', {'packages':['corechart']});
           google.charts.setOnLoadCallback(drawChart);
     
           function drawChart() {
-    
+            
             var data = google.visualization.arrayToDataTable([
-              ['Descrição', 'Valor'],
-              ['App',                     5000],
-              ['WebSite DevFinance',      4500],
-              ['Salário',                 2500],
-              ['Trabalho de Freelance',   1250],
+                ['Descrição', 'Valor'],
+                ['App', 5000],
+                ['Salário', 3000]
             ]);
-    
+
             var options = {
-              title: 'Entradas'
+              title: 'Entradas',
             };
     
             var chart = new google.visualization.PieChart(document.getElementById('piechartIncomes'));
@@ -31,7 +32,7 @@
             chart.draw(data, options);
           }
         </script>
-        <script type="text/javascript">
+        <script type="text/javascript" id="script-piechart-expenses">
           google.charts.load('current', {'packages':['corechart']});
           google.charts.setOnLoadCallback(drawChart);
     
@@ -133,13 +134,7 @@
                 </table>
             </section>
 
-            <section id="piecharts" class="disabled">
-                <h2 id="piecharts-title">Gráficos de Controle</h2>
-                <div id="piecharts-div">
-                    <div id="piechartIncomes"></div>
-                    <div id="piechartExpenses"></div>
-                </div>
-            </section>
+            
         </main>
 
         <div class="modal-overlay">
@@ -200,6 +195,13 @@
                 </div>
             </div>
         </div>
+
+        <section id="piecharts" class="disabled">
+            <h2 id="piecharts-title">Gráficos de Controle</h2>
+            <div id="piechartIncomes" style="width: 500px; height: 277px;"></div>
+            <div id="piechartExpenses" style="width: 500px; height: 277px;"></div>
+            </div>
+        </section>
 
         <footer>
             <p>dev.finance$</p>

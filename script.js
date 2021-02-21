@@ -62,6 +62,65 @@ const Transaction = {
         let total = Number(Transaction.incomes()) + Number(Transaction.expenses())
 
         return total
+    },
+    getAnArrayFromLocalStorage(arrayWithObjects, option) {
+        // O conceito dessa função era pegar os dados das transações que estão salvas no
+        // localStorage e inserir nos gráficos de pizza, não consegui, mas, consegui inserir os
+        // gráficos e adaptá-los para o Dark Theme, além de torná-los responsivos...
+        let auxiliarArray;
+        let arrayToExportAll = ([
+            ['Descrição', 'Valor'],
+        ])
+    
+    
+        for (let objectOfArray of arrayWithObjects) {
+            const objectDescription = objectOfArray.description
+            const objectAmount = objectOfArray.amount
+                
+            auxiliarArray = [String(objectDescription), Number(objectAmount)/100]
+                
+            arrayToExportAll.push(auxiliarArray.slice())        
+            auxiliarArray.splice(0, 2)
+        }
+    
+        function arrayToExportAllTransactions () {
+            return arrayToExportAll
+        }
+    
+        function arrayToExportIncomes () {
+            let arraySlice = arrayToExportAll.slice(0)
+            let arrayIncomes = []
+            
+            for (let arrayTransaction of arraySlice) {
+                if (Number(arrayTransaction[1]) > 0) {
+                    arrayIncomes.push(arrayTransaction)
+                }
+            }
+    
+            return arrayIncomes
+        }
+    
+        function arrayToExportExpenses () {
+            let arraySlice = arrayToExportAll.slice(0)
+            let arrayExpenses = []
+            
+            for (let arrayTransaction of arraySlice) {
+                if (Number(arrayTransaction[1]) < 0) {
+                    arrayExpenses.push(arrayTransaction)
+                }
+            }
+    
+            return arrayExpenses
+        }
+    
+    
+        if (String(option).trim().toLowerCase() === "incomes") {
+            return arrayToExportIncomes()
+        } else if (String(option).trim().toLowerCase() === "expenses") {
+            return arrayToExportExpenses()
+        } else {
+            return arrayToExportAllTransactions()
+        }
     }
 }
 

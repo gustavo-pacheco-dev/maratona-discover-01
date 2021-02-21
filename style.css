@@ -264,7 +264,7 @@ header {
 }
 
 #logo {
-    margin: 0 6.5em 0 0;
+    margin: 0 6.5em 0 0.3em;
 }
 
 .set-chart {
@@ -435,49 +435,46 @@ td.remove-button {
     border-radius: 10em;
 }
 
+rect {
+    fill: #F0F2F5;
+}
+
 section#piecharts.disabled {
     display: none;
     position: absolute;
 }
 
 .piecharts-status-point.disabled {
+    transform: translateY(21px);
+    transition: transform 0.2s ease 0s, backgorund -0.2s ease 0s;
+
     background-color: var(--red);
 }
 
 section#piecharts.piecharts-on {
-    display: block;
-    position: static;
+    display: grid;
+
 }
 
 .piecharts-status-point.piecharts-on {
+    transform: translateY(-1px);
+    transition: transform 0.2s ease 0s, background 0.2s ease 0s;
+
     background-color: var(--light-green);
 }
 
-#piecharts-div {
-    display: block;
+#piechartIncomes {
+    margin: 0 auto;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
 }
 
-svg g:first-of-type text {
-    margin: 0;
-}
-
-g text {
-    margin-right: 5px;
-}
-
-svg g:last-of-type text {
-    margin: 0;
-}
-
-#piechartIncomes {
-    width: 500px; height: 277px;
-    margin: 0 auto;
-}
 #piechartExpenses {
-    width: 500px; height: 277px;
     margin: 0 auto;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 }
 
 /* MODAL ============== */
@@ -580,7 +577,15 @@ footer {
         justify-content: center;
         width: 70vw;
     }
+    .switch-theme {
+        width: 3em;
+        height: 2em;
+    }
+    #switch-theme-button:checked ~ label .switch-theme-toggle {
+        transform: translateX(1em);
+    }
     .set-chart {
+        justify-content: center;
         width: 70vw;
     }
     .header-icons {
