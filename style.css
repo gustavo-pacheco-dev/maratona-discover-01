@@ -102,8 +102,8 @@ body {
 }
 /* DARK THEME SWITCH BUTTON  */
 .switch-theme {
-    width: 4em;
-    height: 2em;
+    width: 3.7em;
+    height: 1.8em;
     border-radius: 10em;
     border: 2px solid white;
     position: absolute;
@@ -115,13 +115,13 @@ body {
     align-items: center;
 }
 .switch-theme-toggle {
-    width: 1.4em;
-    height: 1.4em;
+    width: 1.2em;
+    height: 1.2em;
     background: #FFD347;
     position: absolute;
     border: 1px solid white;
     border-radius: 10em;
-    top: 0.2em;
+    top: 0.15em;
     left: 0.2em;
     cursor: pointer;
     transition: all 0.25s ease-in-out;
@@ -134,7 +134,7 @@ body {
     top: 0.4em;
 }
 #switch-theme-button:checked ~ label .switch-theme-toggle {
-    transform: translateX(2em);
+    transform: translateX(1.85em);
     background: #7B6F98;
 }
 #switch-theme-button:checked ~ .switch-theme-toggle::before {
@@ -260,7 +260,7 @@ header {
     margin-right: 8px;
 }
 .night-icon-div {
-    margin-left: 60px;
+    margin-left: 55px;
 }
 
 #logo {
@@ -578,8 +578,8 @@ footer {
         width: 70vw;
     }
     .switch-theme {
-        width: 3em;
-        height: 2em;
+        width: 2.8em;
+        height: 1.8em;
     }
     #switch-theme-button:checked ~ label .switch-theme-toggle {
         transform: translateX(1em);
