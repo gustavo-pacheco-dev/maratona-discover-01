@@ -7,7 +7,7 @@
 
 ---
 
-### ==> 📸 Screenshots e Vídeos 🎥:
+### ==> 📸 Screenshots 📸:
 	
  #### • Screenshots:
  ![](screenshots/devfinance-screenshot1.png)
