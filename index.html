@@ -75,8 +75,8 @@
                         <img src="./assets/night.svg" alt="Ícone do Dark Theme" class="header-icons" id="night-icon">
                     </div>
                 </div>
-                
-                <img src="assets/logo.svg" alt="Logo Dev Finance" id="logo" title="Logo Dev Finance">
+
+                <img src="assets/logo.svg" alt="Logo Dev Finance" id="logo" title="Logo Dev Finance" onclick="App.reload()">
                 
                 <div class="set-chart" title="Experimente os gráficos e tenha um melhor controle econômico...">
                     <label for="piechart-button" class="add-piecharts"><img src="./assets/pie-chart.svg" alt="Ícone de Gráfico Genérico" class="header-icons" id="chart-icon"></label>
@@ -119,6 +119,13 @@
                 <h2 class="sr-only">Transações</h2>
                 
                 <a href="#" onclick="Modal.open()" class="button new" title="Adicione uma nova transação">+ Nova Transação</a>
+
+                <span id="searchTransaction">
+                    <datalist id="transactionsOptions">
+                    </datalist>
+                    <input type="search" name="searchInput" id="searchInput" list="transactionsOptions" size="20" maxlength="75" placeholder="Pesquisar Transação">
+                    <img src="assets/loupe.svg" alt="searchButton" class="searchButton" title="Pesquisar" onclick="DOM.searchTransaction()">
+                </span>
 
                 <table id="transactions-table">
                     <thead>

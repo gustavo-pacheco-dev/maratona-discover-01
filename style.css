@@ -100,6 +100,11 @@ body {
 .dark-theme div#form small {
     color: #cacaca;
 }
+/* DARK THEME SEARCH TRANSACTION */
+.dark-theme #searchInput{
+    background-color: #424242;
+    color: #cacaca;
+}
 /* DARK THEME SWITCH BUTTON  */
 .switch-theme {
     width: 3.7em;
@@ -265,6 +270,7 @@ header {
 
 #logo {
     margin: 0 6.5em 0 0.3em;
+    cursor: pointer;
 }
 
 .set-chart {
@@ -353,6 +359,11 @@ header {
     width: 100%;
     border-spacing: 0 0.5rem;
     color: #969CB3;
+}
+
+#transactions-table tbody tr.disabledForSearch {
+    display: none;
+    position: absolute;
 }
 
 table thead tr th:first-child, 
@@ -506,6 +517,32 @@ section#piecharts.piecharts-on {
     z-index: 1;
 }
 
+/* SEARCH TRANSACTIONS ============== */
+span#searchTransaction {
+    position: absolute;
+    
+    display: inline-flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+
+    margin-left: 32rem;
+}
+
+#searchInput {
+    display: relative;
+    height: 20px;
+    margin-right: 0.8rem;
+    border-radius: 5px;
+    box-shadow: 1px 1px 4px black;
+}
+
+.searchButton {
+    display: relative;
+    width: 20px;
+    cursor: pointer;
+}
+
 /* FORM ============== */
 #form {
     max-width: 500px;
@@ -561,6 +598,11 @@ footer {
         gap: 2rem;
     }
 }
+@media (max-width: 800px) {
+    span#searchTransaction {
+        margin-left: 40vw;
+    }
+}
 @media (max-width: 500px) {
     .themes-logo-chart {
         display: grid;
@@ -590,5 +632,8 @@ footer {
     }
     .header-icons {
         width: 9vw;
+    }
+    span#searchTransaction {
+        margin-left: 25vw;
     }
 }

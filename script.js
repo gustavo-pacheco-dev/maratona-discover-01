@@ -15,6 +15,12 @@ const Storage = {
     },
     set(transactions) {
         localStorage.setItem("dev.finances:transaction", JSON.stringify(transactions))
+    },
+    getSearches() {
+        return JSON.parse(localStorage.getItem("dev.finances:searches")) || []
+    },
+    setSearches(search) {
+        localStorage.setItem("dev.finances:searches", JSON.stringify(search))
     }
 }
 
@@ -163,6 +169,7 @@ const DOM = {
 
         switchColor.addEventListener('click', checkMode)
 
+
         function checkMode() {
             if (switchColor.checked) {
                 setDarkTheme()
@@ -171,9 +178,11 @@ const DOM = {
             }
         }
 
+
         function setDarkTheme() {
             document.body.classList.add('dark-theme')
         }
+
 
         function setLightTheme() {
             document.body.classList.remove('dark-theme')
@@ -218,6 +227,92 @@ const DOM = {
             }
         }
     },
+    searchTransaction() {
+        const inputSearchTransaction = String(document.getElementById('searchInput').value).trim().toUpperCase()
+        const AllTransactionsJSON = Object.assign(Storage.get())
+        let transactionsArray = []
+        let searchesArray = Storage.getSearches()
+
+        searchAndGetTheTransactionsFound()
+        showTheTransactionsFound()
+
+        function searchAndGetTheTransactionsFound() {
+            for (const transaction of AllTransactionsJSON) {
+                const transactionDescriptionWords = String(transaction.description).trim().toUpperCase().split(' ')
+                const inputSearchTransactionWords = inputSearchTransaction.split(' ')
+                
+                for (const word of inputSearchTransactionWords) {
+                    
+                    if (transactionDescriptionWords.find(wordSearched => wordSearched === word)) {
+                        transactionsArray.push(transaction)
+
+                        if (transactionsArray.length === 1) {
+                            
+                            if (!(searchesArray.find(search => search === inputSearchTransaction))) {
+                                searchesArray.push(String(inputSearchTransaction))
+                            }
+                        }
+                    }
+                }
+            }
+
+            Storage.setSearches(searchesArray)
+        }
+
+
+        function showTheTransactionsFound() {
+            if (transactionsArray.length === 0) {
+                window.alert('Desculpe, mas não encontrei o que você procura. Por favor, verifique se há algum erro de ortografia em sua pesquisa e tente novamente...')
+                DOM.clearTransactions()
+                Transaction.all.forEach(DOM.addTransaction)
+            } else {
+                const AllTransactionsHTML = document.querySelectorAll('#transactions-table tbody tr')
+                
+                for (const transactionHTML of AllTransactionsHTML) {
+                    const dataIndexAttribute = transactionHTML.getAttribute("data-index")
+
+                    const isCorrect = checkIfTransactionIsCorrect(dataIndexAttribute)
+
+                    if (isCorrect === false) {
+                        transactionHTML.classList.add('disabledForSearch')
+                    } else {
+                        transactionHTML.classList.remove('disabledForSearch')
+                    }
+                }
+                
+
+                function checkIfTransactionIsCorrect(dataIndexAttribute) {
+                    let counter = 0
+
+                    for (transactionOfARRAY of transactionsArray) {
+    
+                        if (transactionOfARRAY === AllTransactionsJSON[dataIndexAttribute]) {
+                            counter ++;
+                        }
+                    }
+
+                    if (counter >= 1) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
+            }
+        }
+    },
+    enterTheSearchWords(searchesArray=Storage.getSearches()) {
+        const dataListSearchTag = document.querySelector('datalist#transactionsOptions')
+
+        dataListSearchTag.innerHTML = ''
+        Storage.setSearches(searchesArray)
+
+        for (const searchWord of searchesArray) {
+            const optionTag = document.createElement('option')
+
+            optionTag.setAttribute('value', searchWord)
+            dataListSearchTag.appendChild(optionTag)
+        }
+    }
 }
 
 const Utils = {
@@ -310,6 +405,7 @@ const App = {
         Transaction.all.forEach(DOM.addTransaction)
         DOM.updateBalance()
         Storage.set(Transaction.all)
+        DOM.enterTheSearchWords()
         DOM.switchTheme()
         DOM.addPieChartsAndCheckStatusPoint()
     },
