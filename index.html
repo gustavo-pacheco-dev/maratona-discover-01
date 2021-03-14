@@ -106,16 +106,18 @@
             </section>
 
             <section id="transactions">
-                <h2 class="sr-only">Transações</h2>
+                <div id="add-and-search-in-transactions-table">
+                    <h2 class="sr-only">Transações</h2>
                 
-                <a href="#" onclick="Modal.open()" class="button new" title="Adicione uma nova transação">+ Nova Transação</a>
+                    <a href="#" onclick="Modal.open()" class="button new" title="Adicione uma nova transação">+ Nova Transação</a>
 
-                <span id="searchTransaction">
-                    <datalist id="transactionsOptions">
-                    </datalist>
-                    <input type="search" name="searchInput" id="searchInput" list="transactionsOptions" size="20" maxlength="75" placeholder="Pesquisar Transação">
-                    <img src="assets/loupe.svg" alt="searchButton" class="searchButton" title="Pesquisar" onclick="DOM.searchTransaction()">
-                </span>
+                    <div id="searchTransaction">
+                        <datalist id="transactionsOptions">
+                        </datalist>
+                        <input type="search" name="searchInput" id="searchInput" list="transactionsOptions" size="20" maxlength="75" placeholder="Pesquisar Transação">
+                        <img src="assets/loupe.svg" alt="searchButton" class="searchButton" title="Pesquisar" onclick="DOM.searchTransaction()">
+                    </div>
+                </div>
 
                 <table id="transactions-table">
                     <thead>

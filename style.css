@@ -348,6 +348,13 @@ header {
     border-color: greenyellow;
 }
 
+/* ABOUT TRANSACTIONS-TABLE ============== */
+div#add-and-search-in-transactions-table {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 /* TABLE ============== */
 #transactions {
     display: block;
@@ -464,7 +471,6 @@ section#piecharts.disabled {
 
 section#piecharts.piecharts-on {
     display: grid;
-
 }
 
 .piecharts-status-point.piecharts-on {
@@ -518,15 +524,13 @@ section#piecharts.piecharts-on {
 }
 
 /* SEARCH TRANSACTIONS ============== */
-span#searchTransaction {
-    position: absolute;
+div#searchTransaction {
+    position: relative;
     
-    display: inline-flex;
-    justify-content: space-between;
+    display: flex;
+    justify-content: center;
     align-items: center;
     text-align: center;
-
-    margin-left: 32rem;
 }
 
 #searchInput {
@@ -598,11 +602,6 @@ footer {
         gap: 2rem;
     }
 }
-@media (max-width: 800px) {
-    span#searchTransaction {
-        margin-left: 40vw;
-    }
-}
 @media (max-width: 500px) {
     .themes-logo-chart {
         display: grid;
@@ -633,7 +632,9 @@ footer {
     .header-icons {
         width: 9vw;
     }
-    span#searchTransaction {
-        margin-left: 25vw;
+}
+@media (max-width: 420px) {
+    div#add-and-search-in-transactions-table {
+        display: inline-block;
     }
 }
