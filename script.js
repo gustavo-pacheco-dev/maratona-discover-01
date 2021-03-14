@@ -21,6 +21,12 @@ const Storage = {
     },
     setSearches(search) {
         localStorage.setItem("dev.finances:searches", JSON.stringify(search))
+    },
+    getTheme() {
+        return localStorage.getItem("dev.finances:theme") || ""
+    },
+    setTheme(theme) {
+        localStorage.setItem("dev.finances:theme", theme)
     }
 }
 
@@ -164,27 +170,42 @@ const DOM = {
     clearTransactions() {
         DOM.transactionsContainer.innerHTML = ''
     },
-    switchTheme() {
+    addSwitchThemeEventListener() {
         const switchColor = document.getElementById('switch-theme-button')
 
         switchColor.addEventListener('click', checkMode)
 
 
         function checkMode() {
-            if (switchColor.checked) {
-                setDarkTheme()
+            if (switchColor.checked) {                
+                Storage.setTheme('dark-theme')
             } else {
-                setLightTheme()
+                Storage.setTheme('light-theme')
             }
+
+            DOM.checkTheme()
+        }
+    },
+    checkTheme() {
+        const switchColor = document.getElementById('switch-theme-button')
+
+        if (Storage.getTheme() === 'dark-theme') {
+            setDarkTheme()
+        } else {
+            setLightTheme()
         }
 
 
         function setDarkTheme() {
+            Storage.setTheme('dark-theme')
+            switchColor.checked = true
             document.body.classList.add('dark-theme')
         }
 
 
         function setLightTheme() {
+            Storage.setTheme('light-theme')
+            switchColor.checked = false
             document.body.classList.remove('dark-theme')
         }
     },
@@ -406,7 +427,8 @@ const App = {
         DOM.updateBalance()
         Storage.set(Transaction.all)
         DOM.enterTheSearchWords()
-        DOM.switchTheme()
+        DOM.checkTheme()
+        DOM.addSwitchThemeEventListener()
         DOM.addPieChartsAndCheckStatusPoint()
     },
     reload(){
