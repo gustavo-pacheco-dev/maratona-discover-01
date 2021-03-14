@@ -17,11 +17,7 @@
     
           function drawChart() {
             
-            var data = google.visualization.arrayToDataTable([
-                ['Descrição', 'Valor'],
-                ['App', 5000],
-                ['Salário', 3000]
-            ]);
+            var data = google.visualization.arrayToDataTable(Transaction.pieChartsFromLocalStorage(Storage.get(), "incomes"));
 
             var options = {
               title: 'Entradas',
@@ -38,13 +34,7 @@
     
           function drawChart() {
     
-            var data = google.visualization.arrayToDataTable([
-              ['Descrição', 'Valor'],
-              ['Água',     135.50],
-              ['Luz',      155.75],
-              ['Internet',  200],
-              ['Manutenção do Servidor', 75],
-            ]);
+            var data = google.visualization.arrayToDataTable(Transaction.pieChartsFromLocalStorage(Storage.get(), "expenses"));
     
             var options = {
               title: 'Saídas'

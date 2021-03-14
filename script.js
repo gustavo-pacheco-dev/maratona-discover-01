@@ -75,10 +75,7 @@ const Transaction = {
 
         return total
     },
-    getAnArrayFromLocalStorage(arrayWithObjects, option) {
-        // O conceito dessa função era pegar os dados das transações que estão salvas no
-        // localStorage e inserir nos gráficos de pizza, não consegui, mas, consegui inserir os
-        // gráficos e adaptá-los para o Dark Theme, além de torná-los responsivos...
+    pieChartsFromLocalStorage(arrayWithObjects=Storage.get(), option="total") {
         let auxiliarArray;
         let arrayToExportAll = ([
             ['Descrição', 'Valor'],
@@ -102,6 +99,8 @@ const Transaction = {
         function arrayToExportIncomes () {
             let arraySlice = arrayToExportAll.slice(0)
             let arrayIncomes = []
+
+            arrayIncomes.push(arraySlice[0])
             
             for (let arrayTransaction of arraySlice) {
                 if (Number(arrayTransaction[1]) > 0) {
@@ -116,9 +115,16 @@ const Transaction = {
             let arraySlice = arrayToExportAll.slice(0)
             let arrayExpenses = []
             
+            arrayExpenses.push(arraySlice[0])
+
             for (let arrayTransaction of arraySlice) {
                 if (Number(arrayTransaction[1]) < 0) {
-                    arrayExpenses.push(arrayTransaction)
+                    let auxiliarArrayTwo = []
+
+                    auxiliarArrayTwo.push(arrayTransaction[0])
+                    auxiliarArrayTwo.push((arrayTransaction[1] * (-1)))
+
+                    arrayExpenses.push(auxiliarArrayTwo)
                 }
             }
     
