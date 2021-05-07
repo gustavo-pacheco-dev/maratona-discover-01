@@ -6,6 +6,15 @@ const Modal = {
     close() {
         // Close the "Modal" and remove the "active" class from the modal
         document.querySelector('.modal-overlay').classList.remove('active')
+    },
+    editOpen() {
+        document.querySelector('.modal-overlay-edit').classList.add('active')
+    },
+    editClose() {
+        const modal_overlay_edit = document.querySelector('.modal-overlay-edit')
+        
+        modal_overlay_edit.classList.remove('active')
+        document.body.removeChild(modal_overlay_edit)
     }
 }
 
@@ -38,6 +47,12 @@ const Transaction = {
     },
     remove(index) {
         Transaction.all.splice(index, 1)
+
+        App.reload()
+    },
+    update(updatedTransaction, index) {
+
+        Transaction.all[Number(index)] = updatedTransaction
 
         App.reload()
     },
@@ -152,7 +167,6 @@ const DOM = {
 
         DOM.transactionsContainer.appendChild(tr)
     },
-
     innerHTMLTransaction(transaction, index) {
         const CSSclass = transaction.amount > 0 ?'income':'expense'
 
@@ -160,12 +174,16 @@ const DOM = {
 
         const html = `
         <td class="transaction description">${transaction.description}</td>
+        <td class="transaction update" title="Editar Transação" onclick="DOM.editTransaction(${index})">
+            <img src="./assets/edit.svg" class="transaction-update transaction-edit" id="transaction-update-${index}" alt="Imagem de Editar Transação">
+        </td>
         <td class="transaction ${CSSclass}">${amount}</td>
         <td class="transaction date">${transaction.date}</td>
         <td class="transaction remove-button" title="Remover Transação">
-            <img src="assets/minus.svg" alt="Remover Transação" onclick="Transaction.remove(${index})">
+            <img src="assets/minus.svg" id="remove-button-img" alt="Remover Transação" onclick="Transaction.remove(${index})">
         </td>
         `
+
         return html
     },
     updateBalance() {
@@ -175,6 +193,91 @@ const DOM = {
     },
     clearTransactions() {
         DOM.transactionsContainer.innerHTML = ''
+    },
+    editTransaction(index) {
+        const AllTransactions = [...Transaction.all]
+        const transaction = AllTransactions[Number(index)]
+        const { description, amount, date } = transaction
+        
+        const splittedDate = date.split("/")
+        const pureDate = `${splittedDate[2]}-${splittedDate[1]}-${splittedDate[0]}`
+
+        const formHTML = `
+        <div class="modal-overlay-edit">
+            <div class="modal">
+                <div id="form-edit-${index}" class="form-edit">
+                    <h2>Editar Transação</h2>
+                    
+                    <form action="" onsubmit="Form.editSubmit(event, ${index})">
+                        <div class="input-group">
+                            <label 
+                            for="description-edit"  class="sr-only">
+                            Descrição</label>
+
+                            <input 
+                            type="text" 
+                            name="description-edit-${index}" 
+                            id="description-edit"
+                            class="description-edit"
+                            maxlength="100"
+                            >
+                        </div>
+
+                        <div class="input-group">
+                            <label 
+                            for="amount-edit" 
+                            class="sr-only"
+                            >Valor</label>
+
+                            <input 
+                            type="number" 
+                            step="0.01"
+                            name="amount-edit-${index}" 
+                            id="amount-edit"
+                            class="amount-edit"
+                            >
+                            <br>
+                            <small class="help">Use o sinal - (negativo) para despesas e , (vírgula) para casas decimais</small>
+                        </div>
+                        
+                        <div class="input-group">
+                            <label 
+                            for="date-edit" 
+                            class="sr-only">
+                            Descrição</label>
+
+                            <input 
+                            type="date" 
+                            name="date-edit-${index}" 
+                            id="date-edit"
+                            class="date-edit"
+                            >
+                        </div>
+                        
+                        <div class="input-group actions">
+                            <a href="#" 
+                            onclick="Modal.editClose()" class="button cancel">Cancelar</a>
+                            <button>Salvar</button>
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        `
+
+        document.body.innerHTML += formHTML
+
+        const description_edit = document.querySelector(`input#description-edit`)
+        const amount_edit = document.querySelector(`input#amount-edit`)
+        const date_edit = document.querySelector(`input#date-edit`)
+
+        description_edit.setAttribute('value', `${String(description)}`)
+        amount_edit.setAttribute('value', `${Number(Math.ceil(amount/100))}`)
+        date_edit.setAttribute('value', `${String(pureDate)}`)
+        
+        
+        Modal.editOpen()
     },
     addSwitchThemeEventListener() {
         const switchColor = document.getElementById('switch-theme-button')
@@ -372,25 +475,39 @@ const Form = {
     amount: document.querySelector('input#amount'),
     date: document.querySelector('input#date'),
 
-    getValues() {
-        return {
-            description: Form.description.value,
-            amount: Form.amount.value,
-            date: Form.date.value
+    getValues(option='forAdd') {
+        
+        if (option === 'forAdd') {
+            return {
+                description: Form.description.value,
+                amount: Form.amount.value,
+                date: Form.date.value
+            }
+        } else {
+            const description_edit = document.querySelector('input#description-edit')
+            const amount_edit = document.querySelector('input#amount-edit')
+            const date_edit = document.querySelector('input#date-edit')
+
+
+            return {
+                description: description_edit.value,
+                amount: amount_edit.value,
+                date: date_edit.value
+            }
         }
     },
 
-    validateFields() {
-        const { description, amount, date } = Form.getValues()
+    validateFields(option='forAdd') {
+            const { description, amount, date } = Form.getValues(String(option))
         
-        if (description.trim() === "" || 
-        amount.trim() === "" || 
-        date.trim() === "") {
-            throw new Error("Por favor, preencha todos os campos!!")
-        }
+            if (description.trim() === "" || 
+            amount.trim() === "" || 
+            date.trim() === "") {
+                throw new Error("Por favor, preencha todos os campos!!")
+            }
     },
-    formatData() {
-        let { description, amount, date } = Form.getValues()
+    formatData(option='forAdd') {
+        let { description, amount, date } = Form.getValues(String(option))
 
         amount = Utils.formatAmount(amount)
         date = Utils.formatDate(date)
@@ -401,10 +518,20 @@ const Form = {
             date
         }
     },
-    clearFields() {
-        Form.description.value = ""
-        Form.amount.value = ""
-        Form.date.value = ""
+    clearFields(option='forAdd') {
+        if(option === 'forAdd') {
+            Form.description.value = ""
+            Form.amount.value = ""
+            Form.date.value = ""
+        } else {
+            const description_edit = document.querySelector('input#description-edit')
+            const amount_edit = document.querySelector('input#amount-edit')
+            const date_edit = document.querySelector('input#date-edit')
+
+            description_edit.value = ''
+            amount_edit.value = ''
+            date_edit.value = ''
+        }
     },
     submit(event) {
         event.preventDefault()
@@ -424,6 +551,21 @@ const Form = {
             alert(error.message)
         }
         
+    },
+    editSubmit(event, index) {
+        event.preventDefault()
+
+
+        try {
+
+            Form.validateFields('forEdit')
+            const updatedTransaction = Form.formatData('forEdit')
+            Transaction.update(updatedTransaction, index)
+            Form.clearFields('forEdit')
+            Modal.editClose()
+        } catch (error) {
+            alert(error.message)
+        }
     }
 }
 

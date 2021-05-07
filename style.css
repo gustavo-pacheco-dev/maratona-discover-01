@@ -90,14 +90,14 @@ body {
 .dark-theme .modal {
     background-color: #1A1A1A;
 }
-.dark-theme div#form h2 {
+.dark-theme div#form h2, .dark-theme div.form-edit h2 {
     color: #cacaca;
 }
-.dark-theme div#form input {
+.dark-theme div#form input, .dark-theme div.form-edit input {
     background-color: #424242;
     color: #cacaca;
 }
-.dark-theme div#form small {
+.dark-theme div#form small, .dark-theme div.form-edit small {
     color: #cacaca;
 }
 /* DARK THEME SEARCH TRANSACTION */
@@ -428,7 +428,7 @@ td.expense {
     color: var(--red);
 }
 
-td.remove-button {
+td img#remove-button-img {
     cursor: pointer;
 }
 
@@ -495,7 +495,7 @@ section#piecharts.piecharts-on {
 }
 
 /* MODAL ============== */
-.modal-overlay {
+.modal-overlay, .modal-overlay-edit {
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.7);
@@ -511,7 +511,7 @@ section#piecharts.piecharts-on {
     z-index: 999;
 }
 
-.modal-overlay.active {
+.modal-overlay.active, .modal-overlay-edit.active {
     opacity: 1;
     visibility: visible;
 }
@@ -547,12 +547,27 @@ div#searchTransaction {
     cursor: pointer;
 }
 
+/* UPDATE TRANSACTIONS ============== */
+#transaction-edit {
+    display: flex;
+    width: 100%;
+    height: auto;
+}
+
+.transaction-update {
+    width: 1.5rem;
+    cursor: pointer;
+}
+.dark-theme .td-disabled {
+    background: #424242;
+}
+
 /* FORM ============== */
-#form {
+#form, .form-edit {
     max-width: 500px;
 }
 
-#form h2 {
+#form h2, .form-edit h2 {
     margin-top: 0;
 }
 
